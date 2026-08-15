@@ -1,622 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT 238 - Networking and Client/Server Computing | Course Catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
+        body {
+            font-family: 'Optima', 'Palatino', 'Avenir', 'Helvetica', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: #f5f5f5;
+        }
 
-      <title>CMSC 125 Second Sem 2017-2018</title>
+        .header {
+            background: linear-gradient(135deg, #8B1538 0%, #2E5233 100%);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-      <!-- Bootstrap core CSS -->
-      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-      <!-- Custom styles for this template -->
-      <link href="css/scrolling-nav.css" rel="stylesheet">
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #8B1538;
+            font-size: 1.2rem;
+        }
 
-   </head>
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
 
-   <body id="page-top">
+        .main-container {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
 
-      <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">CMSC 125</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                     <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link js-scroll-trigger" href="#staff">Staff</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link js-scroll-trigger" href="#lecture">Lecture</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link js-scroll-trigger" href="#laboratory">Laboratory</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link js-scroll-trigger" href="#resources">Resources</a>
-                  </li>
-               </ul>
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            width: 280px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+
+        .course-header {
+            border-bottom: 3px solid #8B1538;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .course-number {
+            color: #8B1538;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .course-title {
+            color: #2E5233;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .course-meta {
+            color: #666;
+            font-size: 0.95rem;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            color: #8B1538;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            border-left: 4px solid #F5D800;
+            padding-left: 15px;
+        }
+
+        .section h3 {
+            color: #2E5233;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        .description {
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        .prerequisites {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #8B1538;
+        }
+
+        .objectives ul, .topics ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .objectives li, .topics li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .objectives li:before {
+            content: "▸";
+            color: #8B1538;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .topics li:before {
+            content: "•";
+            color: #2E5233;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .topics ul ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .topics ul ul li:before {
+            content: "◦";
+            color: #666;
+        }
+
+        .sidebar h3 {
+            color: #8B1538;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #F5D800;
+            padding-bottom: 8px;
+        }
+
+        .course-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-links li {
+            margin-bottom: 10px;
+        }
+
+        .course-links a {
+            color: #2E5233;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: block;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .course-links a:hover {
+            background: #f8f9ff;
+            border-left-color: #8B1538;
+            color: #8B1538;
+        }
+
+        .current {
+            background: #8B1538;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .current:hover {
+            background: #2E5233;
+            border-left-color: #F5D800;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                margin-top: 100px;
+            }
+            
+            .sidebar {
+                position: static;
+                width: 100%;
+                max-height: none;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .main-container {
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .course-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <img src="./ics-logo.jpg" class="logo" />
+            <h1>UPLB Institute of Computer Science</h1>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <main class="content">
+            <div class="course-header">
+                <div class="course-number">IT 238</div>
+                <div class="course-title">Networking and Client/Server Computing</div>
+                <div class="course-meta">
+                    <span><strong>Credits:</strong> 3 units (5 hours/week: 2 lecture, 3 laboratory)</span>
+                </div>
             </div>
-         </div>
-      </nav>
 
-      <header class="bg-primary text-white">
-         <div class="container text-center">
-            <h1>Operating Systems</h1>
-            <p class="lead">Second Semester AY 2017-2018</p>
-         </div>
-      </header>
+            <section class="section">
+                <h2>Course Description</h2>
+                <div class="description">
+                    Client/Server computing techniques and applications.
+                </div>
+                <div class="prerequisites">
 
-      <section id="about">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 mx-auto">
-                  <h2>About</h2>
-                  <h5>Catalog Description</h5>
-                  <div class="container">
-                  <table class="table table-condensed table-sm">
-                     <tbody>
-                        <tr>
-                           <td>Course Number</td>
-                           <td>CMSC 125</td>
-                        </tr>
-                        <tr>
-                           <td>Course Title</td>
-                           <td>Operating Systems</td>
-                        </tr>
-                        <tr>
-                           <td>Description</td>
-                           <td>Processor management, memory management, file and disk management, resource management, concurrent processes, networks and distributed systems.</td>
-                        </tr>
-                        <tr>
-                           <td>Prerequisites</td>
-                           <td>CMSC 123 or COI</td>
-                        </tr>
-                        <tr>
-                           <td>Credit</td>
-                           <td>3 units</td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  </div>
-                  <h5>Aim</h5>
-                  <p>The aim of this course is to introduce students to operating systems concepts.</p>
-                  <h5>Objectives</h5>
-                  At the end of this course the student should be able to: 
-                  <ol>
-                     <li>describe the purpose and functions of an operating system;</li>
-                     <li>design and implement programs to perform simple operating system tasks; and</li>
-                     <li>evaluate the performance of different operating system algorithms.</li>
-                  </ol>
-                  <h5>Topics (Tentative)</h5>
-                  <ol>
-                     <li>Topic 1</li>
-                     <li>Topic 2</li>
-                     <li>Topic 3</li>
-                  </ol>
-                  <h5>Evaluation/Grading(Tentative)</h5>
-                  <p></p>
-                  <h5>Attendance Policy</h5>
-                  <p></p>
-                  <h5>Collaboration Policy</h5>
-                  <p></p>
-                  <h5>Honor Code</h5>
-                     <ul>
-                        <li>Properly acknowledge help received.</li>
-                        <li>No looking at solutions/programs from previous years.</li>
-                        <li>No sharing of code with other students.</li>
-                        <li>Be ready to explain your code.</li>
-                     </ul> 
-               </div>
-            </div>
-         </div>
-      </section>
-      
-      <section id="staff" class="bg-light">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 mx-auto">
-                  <h2>Staff</h2>
-                  <table class="table table-striped table-sm">
-                     <thead>
-                     <tr>
-                        <th>Name</th>
-                        <th>Role</th>
-                        <th>Email</th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                           <td>Joseph Anthony C. Hermocilla</td>
-                           <td>Lecturer</td>
-                           <td>jchermocilla@up.edu.ph</td>
-                        </tr>
-                        <tr>
-                           <td>Mary</td>
-                           <td>Lab Instructor</td>
-                           <td>mary@example.com</td>
-                        </tr>
-                        <tr>
-                           <td>July</td>
-                           <td>Lab Instructor</td>
-                           <td>july@example.com</td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-      </section>
+                    <strong>Prerequisites:</strong> CMSC 137 or COI
+                </div>
+            </section>
 
-      <section id="lecture">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 mx-auto">
-                  <h2>Lecture</h2>
-                  <table class="table table-sm table-striped table-bordered">
-                     <thead class="thead-inverse">
-                        <tr>
-                           <th style="width:10%">Meeting</th>
-                           <th>Date</th>
-                           <th>Topic</th>
-                           <th>Readings</th>
-                           <th>Homework</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                           <th scope="row">1</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">2</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">3</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">4</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">5</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">6</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">7</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">8</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">9</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">10</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">11</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">12</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">13</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">14</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">15</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">16</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">17</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">18</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">19</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">20</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">21</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">22</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">23</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">24</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">25</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">26</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">27</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">28</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">29</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">30</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">31</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">32</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">33</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">34</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">35</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">36</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">37</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-      </section>
+            <section class="section">
+                <h2>Course Objectives</h2>
+                <div class="objectives">
+                    At the end of this course the student should be able to:
+                    <ul>
+                        <li>discuss issues on the implementation and management of client/server systems;</li>
+                        <li>develop client/server database applications;</li>
+                        <li>develop client/server applications using components and distributed objects; and</li>
+                        <li>implement a client/server project.</li>
+                    </ul>
+                </div>
+            </section>
 
-      <section id="laboratory" class="bg-light">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 mx-auto">
-                  <h2>Laboratory</h2>
-                  <table class="table table-sm table-striped table-bordered">
-                     <thead class="thead-inverse">
-                        <tr>
-                           <th style="width:10%">Meeting</th>
-                           <th>Date</th>
-                           <th>Topic</th>
-                           <th>Readings</th>
-                           <th>Homework</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                           <th scope="row">1</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">2</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">3</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">4</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">5</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">6</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">7</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">8</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">9</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">10</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">11</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">12</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">13</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">14</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">15</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                           <th scope="row">16</th>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-      </section>
-      
-      <section id="resources">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 mx-auto">
-                  <h2>Resources</h2>
-                  <h5>Textbook</h5>
-                  <p></p>
-                  <h5>Supplementary Textbooks</h5>
-                  <p></p>
-                  <h5>Similar Courses</h5>
-                  <ul>
-                     <li><a href="http://www.cs.cmu.edu/~410/">CMU OS Course</a></li>
-                     <li><a href="https://cs162.eecs.berkeley.edu/">UCB OS Course</a></li>
-                     <li><a href="https://www.cs.princeton.edu/courses/archive/fall17/cos318/">Princeton OS Course</a></li>
-                     <li><a href="http://www.scs.stanford.edu/17wi-cs140/">Stanford OS Course</a></li>
-                     <li><a href="http://web.cs.ucla.edu/classes/winter17/cs111/">UCLA OS Course</a></li>
+            <section class="section">
+                <h2>Course Topics</h2>
+                <div class="topics">
+                  <ul class="topics">
+                     <li>Introduction</li>
+                     <li>System Models</li>
+                     <li>Networking and Internetworking</li>
+                     <li>Interprocess Communications</li>
+                     <li>Remote Invocation</li>
+                     <li>Indirect Communications</li>
+                     <li>Operating System Support</li>
+                     <li>Distributed Objects and Components</li>
+                     <li>Web Services</li>
+                     <li>Peer-to-Peer Systems</li>
+                     <li>Mobile and Ubiquitous Computing</li>
+                     <li>Distributed Multimedia Systems</li>
+                     <li>Google Case Study</li>
                   </ul>
-                  <h5>Software</h5>
-                  <p></p>
-                  <h5>Others</h5>
-                  <p></p>
-               </div>
-            </div>
-         </div>
-      </section>
+                </div>
+            </section>
 
-      <!-- Footer -->
-      <footer class="py-5 bg-dark">
-         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; JACH 2017</p>
-         </div>
-         <!-- /.container -->
-      </footer>
+            <section class="section">
+                <h2>References</h2>
+                <div class="topics">
+                  <ul class="topics">
+                     <li>G. Coulouris, J. Dollimore, T. Kinberg, G. Blair, Distributed Systems: Concepts and Design (5th Ed), Addison-Wesley 2012</li>
+                     <li>F. Kurose, Keith W. Ross, Computer Networking: A Top-Down Approach (7th Edition), Pearson Education Limited 2017</li>
+                  </ul>
+                </div>
+            </section>
 
-      <!-- Bootstrap core JavaScript -->
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-      <!-- Plugin JavaScript -->
-      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        </main>
 
-      <!-- Custom JavaScript for this theme -->
-      <script src="js/scrolling-nav.js"></script>
+        <aside class="sidebar">
+            <h3>Course Offerings</h3>
+            <ul class="course-links">
+                <li><a href="" class="current">First Semester - 2026 (current)</a></li>
+            </ul>
 
-   </body>
-
+        </aside>
+    </div>
+</body>
 </html>
